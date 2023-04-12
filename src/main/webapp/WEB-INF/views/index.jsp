@@ -14,7 +14,7 @@
 			<h1>
 				유기동물 정보 조회 <small>(OPEN API 활용)</small>
 			</h1>
-			<div class="animal_list">
+			<div class="pet search">
 				<form action="/index">
 					<input type="date" name="bgnde" value="${param.bgnde }" /> ~ <input
 						type="date" name="endde" value="${param.endde }" /> <select
@@ -49,71 +49,69 @@
 			<div>총 ${total } 건의 유기동물정보가 존재합니다.</div>
 			<div class="homelessAnimals">
 				<c:forEach items="${datas }" var="obj">
-						<div>
-							<div style="opacity: 0.8">
-								<b>${obj.happenDt }</b>
-								<hr color="#eeeeee" />
-								<img src="${obj.filename }"/>
-								<hr color="#eeeeee" />
-								<span>${obj.kindCd } (${obj.specialMark })</span>
-								<hr color="#eeeeee" />
-								<span>${obj.orgNm } ${obj.happenPlace }</span>
-							</div>
+					<div>
+						<div style="opacity: 0.8">
+							<b>${obj.happenDt }</b>
+							<hr color="#eeeeee" />
+							<img src="${obj.filename }" />
+							<hr color="#eeeeee" />
+							<span>${obj.kindCd } (${obj.specialMark })</span>
+							<hr color="#eeeeee" />
+							<span>${obj.orgNm } ${obj.happenPlace }</span>
 						</div>
+					</div>
 				</c:forEach>
 			</div>
 		</div>
 		<%-- 페이징처리 --%>
-		<c:set var="currentPage"
-			value="${empty param.pageNo ? 1 : param.pageNo }" />
-		<div style="text-align: right">
-			<%-- existPrev 처리 --%>
-			<c:if test="${existPrev }">
-				<c:url value="/" var="target">
+			<c:set var="currentPage"
+				value="${empty param.pageNo ? 1 : param.pageNo }" />
+			<div style="text-align: right">
+				<%-- existPrev 처리 --%>
+				<c:if test="${existPrev }">
+					<c:url value="/" var="target">
 						<c:param name="upkind" value="${param.upkind }" />
 						<c:param name="upr_cd" value="${param.upr_cd }" />
 						<c:param name="bgnde" value="${param.bgnde }" />
 						<c:param name="endde" value="${param.endde }" />
 						<c:param name="pageNo" value="${start-1 }" />
-				</c:url>
-				<a href="${target}">←</a>
-			</c:if>
-			<%-- existPrev 처리 끝 --%>
-			<%-- 페이징처리 --%>
-			<c:forEach var="p" begin="${start }" end="${last }">
-				<c:url value="/" var="target">
+					</c:url>
+					<a href="${target}">←</a>
+				</c:if>
+				<%-- existPrev 처리 끝 --%>
+				<%-- 페이징처리 --%>
+				<c:forEach var="p" begin="${start }" end="${last }">
+					<c:url value="/" var="target">
 						<c:param name="upkind" value="${param.upkind }" />
 						<c:param name="upr_cd" value="${param.upr_cd }" />
 						<c:param name="bgnde" value="${param.bgnde }" />
 						<c:param name="endde" value="${param.endde }" />
 						<c:param name="pageNo" value="${p }" />
-				</c:url>
-			<%-- 현재페이지 --%>
-				<c:choose>
-					<c:when test="${p eq currentPage }">
-						<b style="color: fuchsia;">${p }</b>
-					</c:when>
-					<c:otherwise>
-						<a href="${target }">${p }</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			<%-- 페이징처리끝 --%>
-			<%-- existNext 처리 --%>
-			<c:if test="${existNext }">
-				<c:url value="/" var="target">
+					</c:url>
+					<%-- 현재페이지 --%>
+					<c:choose>
+						<c:when test="${p eq currentPage }">
+							<b style="color: fuchsia;">${p }</b>
+						</c:when>
+						<c:otherwise>
+							<a href="${target }">${p }</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<%-- 페이징처리끝 --%>
+				<%-- existNext 처리 --%>
+				<c:if test="${existNext }">
+					<c:url value="/" var="target">
 						<c:param name="upkind" value="${param.upkind }" />
 						<c:param name="upr_cd" value="${param.upr_cd }" />
-						<c:param name="pageNo" value="${param.pageNo }" />
 						<c:param name="bgnde" value="${param.bgnde }" />
 						<c:param name="endde" value="${param.endde }" />
-					<c:param name="pageNo" value="${last + 1 }" />
-				</c:url>
-				<a href="${target }">→</a>
-			</c:if>
+						<c:param name="pageNo" value="${last + 1 }" />
+					</c:url>
+					<a href="${target }">→</a>
+				</c:if>
+			</div>
 		</div>
-			<%-- existNext 처리끝 --%>
-
-	</div>
+		<%-- existNext 처리끝 --%>
 </body>
 </html>

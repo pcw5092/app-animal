@@ -43,31 +43,26 @@ public class IndexController extends HttpServlet {
 			req.setAttribute("datas", animalResponse.getBody().getItems().getItem());
 			req.setAttribute("total", animalResponse.getBody().getTotalCount());
 
-
-
 			int p;
 			if (req.getParameter("pageNo") == null) {
 				p = 1;
 			} else {
 				p = Integer.parseInt(req.getParameter("pageNo"));
 			}
-			
+
 			int total = animalResponse.getBody().getTotalCount();
 			int lastPage = total / 12 + (total % 12 > 0 ? 1 : 0);
 
-			int idx = p * 10;
-			
 			int start = p % 5 == 0 ? p - 4 : p - (p % 5) + 1;
 			int last = p % 5 == 0 ? p : p - (p % 5) + 5;
 
 			last = last > lastPage ? lastPage : last;
 
-			req.setAttribute("idx", idx);
 			req.setAttribute("start", start);
 			req.setAttribute("last", last);
 
-			boolean existPrev = p >= 6;
-			boolean existNext = lastPage > last;
+			boolean existPrev = start == 1 ? false : true;
+			boolean existNext = last < lastPage - 1 ? true : false;
 
 			req.setAttribute("existPrev", existPrev);
 			req.setAttribute("existNext", existNext);

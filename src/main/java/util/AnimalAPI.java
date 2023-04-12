@@ -24,7 +24,7 @@ public class AnimalAPI {
 			params.put("serviceKey",
 					"KF1l%2BnVkdaGwDeDIF%2BQe6LFzV9IPyLMUW36GmiXZJxC%2FZjKe7%2BO2K74RbaVctYEebdPtykdbcyZsKmj%2Bfh%2F1MA%3D%3D");
 			params.put("_type", "json");
-			params.put("numOfRows", "12");
+			params.put("numOfRows", "17");
 			params.put("upkind", upkind == null ? "" : upkind);
 			params.put("upr_cd", upr_cd == null ? "" : upr_cd);
 			params.put("pageNo", pageNo == null ? "" : pageNo);
