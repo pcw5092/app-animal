@@ -110,3 +110,33 @@ button[type="submit"] {
 button[type="submit"]:hover {
 	background-color: #3e8e41;
 }
+/* 유기동물정보 */
+.homelessAnimals {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
+}
+
+.homelessAnimals div {
+	width: 50%;
+	padding: 10px;
+	height: 280px;
+}
+
+.homelessAnimals img {
+	height: 100px;
+}
+
+.homelessAnimals hr {
+	margin-top: 8px;
+	margin-bottom: 8px;
+	border: none;
+	height: 1px;
+	background-color: #eeeeee;
+}
+
+.homelessAnimals span {
+	font-size: 14px;
+	color: #333333;
+}

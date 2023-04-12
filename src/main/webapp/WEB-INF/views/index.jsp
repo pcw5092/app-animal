@@ -45,23 +45,21 @@
 					<button type="submit">조회</button>
 				</form>
 			</div>
+			<%-- 유기동물 정보 리스트 --%>
 			<div>총 ${total } 건의 유기동물정보가 존재합니다.</div>
-			<div style="display: flex; flex-wrap: wrap;">
+			<div class="homelessAnimals">
 				<c:forEach items="${datas }" var="obj">
-					<div style="width: 50%; padding: 10px; height: 280px;">
-						<div
-							style="width: 100%; border: 1px solid #dddddd; padding: 4px; height: 100%; overflow: hidden;">
+						<div>
 							<div style="opacity: 0.8">
 								<b>${obj.happenDt }</b>
 								<hr color="#eeeeee" />
-								<img src="${obj.filename }" style="height: 100px;" />
+								<img src="${obj.filename }"/>
 								<hr color="#eeeeee" />
 								<span>${obj.kindCd } (${obj.specialMark })</span>
 								<hr color="#eeeeee" />
 								<span>${obj.orgNm } ${obj.happenPlace }</span>
 							</div>
 						</div>
-					</div>
 				</c:forEach>
 			</div>
 		</div>
@@ -72,14 +70,11 @@
 			<%-- existPrev 처리 --%>
 			<c:if test="${existPrev }">
 				<c:url value="/" var="target">
-					<c:forEach items="${param.pageNo }" var="p">
-						<c:param name="${param.upkind }" value="${p }" />
-						<c:param name="${param.upr_cd }" value="${p }" />
-						<c:param name="${param.pageNo }" value="${p }" />
-						<c:param name="${param.bgnde }" value="${p }" />
-						<c:param name="${param.endde }" value="${p }" />
-					</c:forEach>
-					<c:param name="pageNo" value="${start-1 }" />
+						<c:param name="upkind" value="${param.upkind }" />
+						<c:param name="upr_cd" value="${param.upr_cd }" />
+						<c:param name="bgnde" value="${param.bgnde }" />
+						<c:param name="endde" value="${param.endde }" />
+						<c:param name="pageNo" value="${start-1 }" />
 				</c:url>
 				<a href="${target}">←</a>
 			</c:if>
@@ -87,17 +82,15 @@
 			<%-- 페이징처리 --%>
 			<c:forEach var="p" begin="${start }" end="${last }">
 				<c:url value="/" var="target">
-					<c:forEach items="${param.pageNo }" var="p">
-						<c:param name="${param.upkind }" value="${p }" />
-						<c:param name="${param.upr_cd }" value="${p }" />
-						<c:param name="${param.pageNo }" value="${p }" />
-						<c:param name="${param.bgnde }" value="${p }" />
-						<c:param name="${param.endde }" value="${p }" />
-					</c:forEach>
-					<c:param name="pageNo" value="${p }" />
+						<c:param name="upkind" value="${param.upkind }" />
+						<c:param name="upr_cd" value="${param.upr_cd }" />
+						<c:param name="bgnde" value="${param.bgnde }" />
+						<c:param name="endde" value="${param.endde }" />
+						<c:param name="pageNo" value="${p }" />
 				</c:url>
+			<%-- 현재페이지 --%>
 				<c:choose>
-					<c:when test="${p eq param.pageNo }">
+					<c:when test="${p eq currentPage }">
 						<b style="color: fuchsia;">${p }</b>
 					</c:when>
 					<c:otherwise>
@@ -109,19 +102,17 @@
 			<%-- existNext 처리 --%>
 			<c:if test="${existNext }">
 				<c:url value="/" var="target">
-					<c:forEach items="${param.pageNo }" var="p">
-						<c:param name="${param.upkind }" value="${p }" />
-						<c:param name="${param.upr_cd }" value="${p }" />
-						<c:param name="${param.pageNo }" value="${p }" />
-						<c:param name="${param.bgnde }" value="${p }" />
-						<c:param name="${param.endde }" value="${p }" />
-					</c:forEach>
+						<c:param name="upkind" value="${param.upkind }" />
+						<c:param name="upr_cd" value="${param.upr_cd }" />
+						<c:param name="pageNo" value="${param.pageNo }" />
+						<c:param name="bgnde" value="${param.bgnde }" />
+						<c:param name="endde" value="${param.endde }" />
 					<c:param name="pageNo" value="${last + 1 }" />
 				</c:url>
 				<a href="${target }">→</a>
 			</c:if>
-			<%-- existNext 처리끝 --%>
 		</div>
+			<%-- existNext 처리끝 --%>
 
 	</div>
 </body>

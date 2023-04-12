@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 
+import data.animal.AnimalItem;
 import data.animal.AnimalResponse;
 import data.animal.AnimalResponseResult;
 
@@ -48,5 +49,10 @@ public class AnimalAPI {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public static AnimalItem findByDesertionNo(String no) {
+		
+		return null;
 	}
 }

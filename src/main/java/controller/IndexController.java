@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import data.animal.AnimalResponse;
+import data.sido.SidoResponse;
 import util.AnimalAPI;
+import util.SidoAPI;
 
 @WebServlet("/index")
 public class IndexController extends HttpServlet {
@@ -31,29 +33,30 @@ public class IndexController extends HttpServlet {
 			endde = endde.substring(0, 4) + endde.substring(5, 7) + endde.substring(8);
 		}
 		AnimalResponse animalResponse = AnimalAPI.getAnimals(upkind, upr_cd, pageNo, bgnde, endde);
+		SidoResponse sidoResponse = SidoAPI.getSidos();
+
+		if (sidoResponse != null) {
+			req.setAttribute("sidos", sidoResponse.getBody().getItems().getItem());
+		}
 
 		if (animalResponse != null) {
 			req.setAttribute("datas", animalResponse.getBody().getItems().getItem());
 			req.setAttribute("total", animalResponse.getBody().getTotalCount());
-			int total = animalResponse.getBody().getTotalCount();
 
-			req.setAttribute("lastPageNo", total / 12 + (total % 12 > 0 ? 1 : 0));
-			
-			int lastPage = total / 12 + (total % 12 > 0 ? 1 : 0);
-			
+
+
 			int p;
 			if (req.getParameter("pageNo") == null) {
 				p = 1;
 			} else {
 				p = Integer.parseInt(req.getParameter("pageNo"));
 			}
-
-			Map<String, Object> map = new HashMap<>();
-			map.put("a", p * 10 - 9);
-			map.put("b", p * 10);
+			
+			int total = animalResponse.getBody().getTotalCount();
+			int lastPage = total / 12 + (total % 12 > 0 ? 1 : 0);
 
 			int idx = p * 10;
-
+			
 			int start = p % 5 == 0 ? p - 4 : p - (p % 5) + 1;
 			int last = p % 5 == 0 ? p : p - (p % 5) + 5;
 
@@ -69,9 +72,6 @@ public class IndexController extends HttpServlet {
 			req.setAttribute("existPrev", existPrev);
 			req.setAttribute("existNext", existNext);
 		}
-
-
-
 
 		req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
 	}
