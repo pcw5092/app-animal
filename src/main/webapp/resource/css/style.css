@@ -76,3 +76,37 @@ div:nth-of-type(2) {
 	border-radius: 5px;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
+
+/* 동물 리스트 */
+.animal_list {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+select[name="upkind"] {
+	margin: 0 10px;
+	padding: 5px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+select[name="upkind"]:hover {
+	background-color: #f2f2f2;
+}
+
+button[type="submit"] {
+	padding: 5px 10px;
+	font-size: 16px;
+	background-color: #4CAF50;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button[type="submit"]:hover {
+	background-color: #3e8e41;
+}
